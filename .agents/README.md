@@ -1,18 +1,15 @@
-# Quy tắc và skill dùng chung
+# Quy tắc và skill dùng lại
 
-## Phạm vi
+- `AGENTS.md` ở root: workflow, kiểm chứng và bảo mật; điều chỉnh theo project hiện tại.
+- `rules/`: Ponytail và Graphify bổ trợ. Metadata `always_on` chỉ có tác dụng nếu harness hỗ trợ; `AGENTS.md` vẫn chứa quy trình cốt lõi.
+- `skills/`: các thư mục thật được mang theo repo. Cài bằng `setup.ps1` tạo bản riêng trong project, không liên kết tới một đường dẫn cá nhân.
 
-- `AGENTS.md`: quy trình, kiểm chứng, bảo mật và nghiệp vụ của dự án hiện tại.
-- `.agents/rules/`: Ponytail chọn giải pháp tối giản, Graphify điều hướng mã nguồn. Phạm vi, xử lý yêu cầu chưa rõ và kiểm chứng nằm trong `AGENTS.md`; không cần thêm rule Karpathy trùng nội dung.
-- `.agents/skills`: junction tới `C:\xampp\htdocs\fls_thong_nhat\.agents\skills`. Đây là thư viện dùng chung, không phải bản riêng của CareBVTN.
-- `.gemini/antigravity/skills`: nguồn bổ sung hiện có. Với tên trùng, ưu tiên bản chung khi có thể chọn đường dẫn; không nạp cả hai. Chưa xác minh thứ tự khám phá của từng harness nên giữ nguyên bản phụ, không xóa hay thay cấu hình suy đoán.
-- Skill toàn cục cũng có thể xuất hiện trong catalog. Graphify hiện có tại `C:\Users\LENOVO\.agents\skills\graphify`; không phải thành phần được mang theo chỉ bằng junction dự án.
+## Chọn và dùng skill
 
-## Dùng cho dự án mới
+Chỉ nạp skill phù hợp nhiệm vụ. Với skill trùng tên ở nhiều nguồn, dùng bản project nếu harness cho chọn đường dẫn; không nạp hai bản và không suy đoán thứ tự ưu tiên. Sau khi cài/sửa metadata, mở phiên mới rồi kiểm tra catalog thực tế. Trigger là hướng dẫn lựa chọn, không bảo đảm hành vi.
 
-1. Đọc hướng dẫn tại `C:\xampp\htdocs\fls_thong_nhat\.agents\README.md` và xác minh đích thư viện còn tồn tại.
-2. Liên kết `.agents/skills` tới cùng thư viện khi thư mục đích trong dự án mới chưa tồn tại. Giữ nguyên thư mục có sẵn; kiểm tra trước khi hợp nhất.
-3. Tái sử dụng rule bổ trợ, nhưng viết `AGENTS.md` theo stack, lệnh kiểm tra và rủi ro thực tế của dự án mới; không sao chép nghiệp vụ y tế sang dự án khác.
-4. Mở phiên mới và kiểm tra catalog thực tế. Danh sách skill của phiên đang chạy có thể chưa phản ánh metadata vừa sửa.
+Nếu chủ động chuyển sang junction/thư viện chung, ghi rõ đích tại tài liệu project: sửa qua liên kết ảnh hưởng mọi project dùng thư viện. Installer/updater của kit từ chối đường dẫn liên kết để tránh sửa nhầm nguồn chung.
 
-Trigger là chỉ dẫn lựa chọn skill của model, không phải bảo đảm thực thi. Chỉ nạp skill khớp nhiệm vụ; kiểm tra hành vi trên harness sử dụng trước khi khẳng định trigger hoạt động.
+## Bảo trì
+
+Chạy `update-skills.ps1` ở root để kiểm kê local; xem README root trước khi dùng `-Apply`. Lockfile hiện chưa bao phủ đủ thư viện. Giữ chỉnh sửa riêng, kiểm tra nguồn và giấy phép trước khi thay skill; không sửa nội dung bên thứ ba hàng loạt chỉ để đồng bộ phong cách tài liệu.

@@ -1,4 +1,4 @@
-# AGENTS.md — Quy tắc vận hành CareBVTN
+# AGENTS.md — Quy tắc vận hành project
 
 Áp dụng cho mọi agent làm việc trong repository. Thực thi nhanh, thay đổi tối thiểu, kiểm chứng trước khi báo hoàn tất. Khi có xung đột, tuân theo thứ bậc chỉ dẫn của harness và nêu ngắn gọn xung đột ảnh hưởng đến công việc.
 
@@ -17,7 +17,7 @@
 - Chỉ nạp skill cần thiết cho nhiệm vụ; không nạp hàng loạt, theo từ khóa đơn lẻ hoặc nạp lại skill đã có trong ngữ cảnh.
 - Các điểm định tuyến chính khi skill khả dụng: coding/review → `ponytail`; thiết kế UI → `frontend-design`; sửa UI theo ảnh → `visual-edit-precision`; kiểm tra web bằng trình duyệt → `webapp-testing`; sửa hướng dẫn agent → `writing-for-agents`. Với nhiệm vụ khác, dựa vào mô tả thực tế của skill.
 - Áp dụng hướng dẫn vào công việc, không chỉ thông báo “đã nạp skill”. Nếu skill không khả dụng, dùng quy tắc tại đây và báo giới hạn khi ảnh hưởng kết quả.
-- `.agents/skills` là liên kết tới thư viện dùng chung có chủ đích; sửa qua liên kết ảnh hưởng mọi dự án sử dụng. Giữ hướng dẫn đặc thù CareBVTN tại đây, không đưa vào skill chung.
+- `.agents/skills` mặc định là bản riêng trong project. Nếu dùng liên kết tới thư viện chung, xác minh đích trước khi sửa vì thay đổi ảnh hưởng mọi project sử dụng. Giữ hướng dẫn đặc thù project tại đây, không đưa vào skill chung.
 - Khi nhiều nguồn có cùng tên skill, dùng bản từ `.agents/skills` nếu harness cho phép chọn đường dẫn; nguồn phụ chỉ bổ sung tên còn thiếu. Không nạp hai bản cùng tên hoặc suy đoán thứ tự ưu tiên của harness. Xem hướng dẫn tái sử dụng tại `.agents/README.md`.
 
 ## 3. Ponytail — Kỹ thuật tối giản
@@ -26,7 +26,7 @@
 - Thứ tự lựa chọn: có thực sự cần → tái sử dụng thành phần dự án → thư viện chuẩn/nền tảng → dependency đã cài → viết lượng code tối thiểu.
 - Không thêm dependency, wrapper, interface, cấu hình hoặc tính năng “để dành” khi chưa có nhu cầu thực tế. Giữ cấu trúc và quy ước hiện có.
 - Khi sửa lỗi, kiểm tra các caller liên quan và sửa nguyên nhân tại điểm dùng chung nếu phù hợp.
-- Không cắt giảm validation, xử lý lỗi bảo vệ dữ liệu y tế, phân quyền RBAC hoặc trợ năng WCAG 2.2 để đổi lấy tốc độ.
+- Không cắt giảm validation, xử lý lỗi bảo vệ dữ liệu, phân quyền hoặc trợ năng để đổi lấy tốc độ.
 
 ## 4. Điều hướng mã nguồn và Graphify
 
@@ -42,13 +42,13 @@
 - CSS thay đổi: kiểm tra cú pháp bằng công cụ sẵn có và xem bản render; cân bằng ngoặc không thay thế kiểm tra giao diện.
 - UI thay đổi: kiểm tra luồng thao tác, trạng thái lỗi/loading, kích thước màn hình liên quan và bàn phím/focus đối với thành phần tương tác. Dùng dữ liệu giả hoặc đã che thông tin khi chụp ảnh.
 - Logic không tầm thường hoặc sửa lỗi: để lại một kiểm tra hành vi có thể chạy lại theo cơ chế test hiện có; tránh test chỉ sao chép implementation. Thay đổi thuần trình bày nhỏ không cần dựng bộ test mới.
-- Auth, dữ liệu y tế, lịch nhắc hoặc thao tác xóa: kiểm tra cả thành công, thất bại và ranh giới quyền/dữ liệu bị ảnh hưởng. Không dùng dữ liệu thật để thử thao tác phá hủy nếu chưa được cho phép.
+- Auth, dữ liệu nhạy cảm, tác vụ định kỳ hoặc thao tác xóa: kiểm tra cả thành công, thất bại và ranh giới quyền/dữ liệu bị ảnh hưởng. Không dùng dữ liệu thật để thử thao tác phá hủy nếu chưa được cho phép.
 - Chạy `git diff --check` và rà lại diff cuối. Chỉ báo những kiểm tra đã thực sự chạy; nêu rõ phần bị chặn hoặc chưa kiểm tra. Không suy từ lint thành “tính năng đúng”, từ benchmark local thành hiệu năng production, hoặc tự tuyên bố tuân thủ WCAG đầy đủ.
 
 ## 6. Bảo mật, dữ liệu và Git
 
-- Không commit, in log hoặc gửi ra ngoài mật khẩu CSDL, JWT/token, khóa bí mật, Firebase Service Account; đặc biệt chú ý `api/config/local.php` và `fcm_config.php`.
-- Ưu tiên dữ liệu giả cho kiểm thử. Họ tên, CCCD, SĐT, bệnh án trong ảnh/video/log thử nghiệm phải được mask trước khi lưu hoặc chia sẻ; chỉ xuất kết quả tổng hợp khi đủ chứng minh.
+- Không commit, in log hoặc gửi ra ngoài mật khẩu CSDL, JWT/token, khóa bí mật, service account hay cấu hình local có credentials.
+- Ưu tiên dữ liệu giả cho kiểm thử. Thông tin cá nhân và dữ liệu nhạy cảm trong ảnh/video/log phải được mask trước khi lưu hoặc chia sẻ; chỉ xuất kết quả tổng hợp khi đủ chứng minh.
 - Không reset, ghi đè công việc người khác, xóa dữ liệu, force-push hoặc bỏ qua hook khi chưa được cho phép rõ ràng.
 - Chỉ commit/push khi người dùng yêu cầu; rà nội dung stage, không ép thêm file bị ignore hoặc thông tin nhạy cảm. Sau push, kiểm tra trạng thái đồng bộ trước khi báo thành công.
 - Viết nội dung mô tả commit bằng tiếng Việt; có thể giữ tiền tố kỹ thuật như `fix`, `feat`.
