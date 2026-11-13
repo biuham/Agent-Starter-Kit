@@ -7,7 +7,6 @@ Bộ khung tinh gọn, chuẩn hóa cao dành cho các AI Agent (OpenCode, Antig
 ## 🌟 Điểm nổi bật
 - **Kỷ luật thực thi cao (No Bureaucracy)**: Cấm sinh giấy tờ, spec/plan thừa thãi cho các task thông thường; code trực tiếp vào mã nguồn.
 - **Kỹ thuật Ponytail**: Thang quyết định 7 nấc ép diff code luôn nhỏ nhất, không sinh speculative abstractions.
-- **Quy tắc Karpathy**: "Think before coding", "Surgical changes" (chỉ sửa đúng chỗ cần sửa, dọn rác do mình tạo ra).
 - **Lối tắt Fast-path (Graphify)**: Đọc file trực tiếp khi đã rõ mục tiêu; tra cứu Knowledge Graph khi cần hiểu kiến trúc.
 - **63 Skills cốt lõi đã thanh lọc**: Đã loại bỏ 100% rác (Web3/Crypto, Game Dev, Big Data...), giữ lại đầy đủ:
   - Giao diện & Trợ năng: UI/UX, Tailwind, Responsive, WCAG 2.2, Core Web Vitals.
@@ -24,7 +23,7 @@ Bộ khung tinh gọn, chuẩn hóa cao dành cho các AI Agent (OpenCode, Antig
 agent-starter-kit/
 ├── AGENTS.md                  # Bản hiến pháp quy tắc mẹ
 ├── .agents/
-│   ├── rules/                 # 3 luật nền tảng nạp tự động (graphify, ponytail, karpathy)
+│   ├── rules/                 # 2 luật nền tảng nạp tự động (graphify, ponytail)
 │   ├── skills/                # 63 skills thực chiến đã kiểm chứng
 │   └── workflows/             # Workflows tự động
 ├── docs/agents/               # Hướng dẫn domain & issue-tracker nội bộ
@@ -59,3 +58,4 @@ Bất cứ khi nào muốn nâng cấp các skill lên phiên bản mới nhất
 .\update-skills.ps1
 # hoặc: npx skills update
 ```
+
