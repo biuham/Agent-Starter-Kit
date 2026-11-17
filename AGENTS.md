@@ -13,9 +13,15 @@
 
 ## 2. Tự động sử dụng skill
 
-- Trước khi thực hiện, đối chiếu nhiệm vụ với mô tả skill khả dụng và nạp skill phù hợp bằng công cụ của harness; không chờ người dùng nhắc tên.
+- TRƯỚC KHI THỰC HIỆN BẤT KỲ THAO TÁC NÀO: Đối chiếu nhiệm vụ với danh sách skill khả dụng và nạp skill phù hợp; không chờ người dùng nhắc tên. Nếu harness không có công cụ chuyên dụng (như OpenCode/CLI thông thường), BẮT BUỘC dùng `read_file` để đọc nội dung file `.agents/skills/<tên-skill>/SKILL.md` trước khi sửa mã nguồn hoặc trả lời.
 - Chỉ nạp skill cần thiết cho nhiệm vụ; không nạp hàng loạt, theo từ khóa đơn lẻ hoặc nạp lại skill đã có trong ngữ cảnh.
-- Các điểm định tuyến chính khi skill khả dụng: coding/review → `ponytail`; thiết kế UI → `frontend-design`; sửa UI theo ảnh → `visual-edit-precision`; kiểm tra web bằng trình duyệt → `webapp-testing`; sửa hướng dẫn agent → `writing-for-agents`. Với nhiệm vụ khác, dựa vào mô tả thực tế của skill.
+- Các điểm định tuyến chính (gọi `read_file` vào file tương ứng):
+  - Coding, refactor, review code → `.agents/skills/ponytail/SKILL.md`
+  - Thiết kế UI / HTML / CSS → `.agents/skills/frontend-design/SKILL.md`
+  - Sửa UI theo ảnh / screenshot → `.agents/skills/visual-edit-precision/SKILL.md`
+  - Kiểm tra web bằng trình duyệt → `.agents/skills/webapp-testing/SKILL.md`
+  - Sửa rules / hướng dẫn agent → `.agents/skills/writing-for-agents/SKILL.md`
+  - Với nhiệm vụ khác, tra cứu và đọc file tương ứng trong `.agents/skills/`.
 - Áp dụng hướng dẫn vào công việc, không chỉ thông báo “đã nạp skill”. Nếu skill không khả dụng, dùng quy tắc tại đây và báo giới hạn khi ảnh hưởng kết quả.
 - `.agents/skills` mặc định là bản riêng trong project. Nếu dùng liên kết tới thư viện chung, xác minh đích trước khi sửa vì thay đổi ảnh hưởng mọi project sử dụng. Giữ hướng dẫn đặc thù project tại đây, không đưa vào skill chung.
 - Khi nhiều nguồn có cùng tên skill, dùng bản từ `.agents/skills` nếu harness cho phép chọn đường dẫn; nguồn phụ chỉ bổ sung tên còn thiếu. Không nạp hai bản cùng tên hoặc suy đoán thứ tự ưu tiên của harness. Xem hướng dẫn tái sử dụng tại `.agents/README.md`.
