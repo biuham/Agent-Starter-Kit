@@ -16,9 +16,14 @@
 - TRƯỚC KHI THỰC HIỆN BẤT KỲ THAO TÁC NÀO: Đối chiếu nhiệm vụ với danh sách skill khả dụng và nạp skill phù hợp; không chờ người dùng nhắc tên. Nếu harness không có công cụ chuyên dụng (như OpenCode/CLI thông thường), BẮT BUỘC dùng `read_file` để đọc nội dung file `.agents/skills/<tên-skill>/SKILL.md` trước khi sửa mã nguồn hoặc trả lời.
 - Chỉ nạp skill cần thiết cho nhiệm vụ; không nạp hàng loạt, theo từ khóa đơn lẻ hoặc nạp lại skill đã có trong ngữ cảnh.
 - Các điểm định tuyến chính (gọi `read_file` vào file tương ứng):
-  - Coding, refactor, review code → `.agents/skills/ponytail/SKILL.md`
+  - Coding, refactor, review code → LUÔN LUÔN đọc `.agents/skills/ponytail/SKILL.md`
+  - Điều tra bug, phân tích lỗi, ứng cứu sự cố → `.agents/skills/diagnosing-bugs/SKILL.md`
+  - Viết test, TDD, kiểm thử hồi quy → `.agents/skills/tdd/SKILL.md`
+  - Tối ưu SQL, truy vấn CSDL, phân tích index → `.agents/skills/sql-optimization-patterns/SKILL.md`
+  - Thiết kế hoặc review API (REST, GraphQL) → `.agents/skills/api-design-principles/SKILL.md`
   - Thiết kế UI / HTML / CSS → `.agents/skills/frontend-design/SKILL.md`
   - Sửa UI theo ảnh / screenshot → `.agents/skills/visual-edit-precision/SKILL.md`
+  - Kiểm tra tiếp cận / WCAG / a11y → `.agents/skills/accessibility/SKILL.md`
   - Kiểm tra web bằng trình duyệt → `.agents/skills/webapp-testing/SKILL.md`
   - Sửa rules / hướng dẫn agent → `.agents/skills/writing-for-agents/SKILL.md`
   - Với nhiệm vụ khác, tra cứu và đọc file tương ứng trong `.agents/skills/`.

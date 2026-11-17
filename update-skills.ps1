@@ -10,7 +10,7 @@ foreach ($path in @('.agents', 'skills-lock.json')) {
 Assert-KitPlainPath (Join-Path $PSScriptRoot '.scratch')
 $lockPath = Join-Path $PSScriptRoot 'skills-lock.json'
 $lock = Get-Content -LiteralPath $lockPath -Raw -Encoding UTF8 | ConvertFrom-Json
-if ($lock.version -ne 1 -or -not $lock.skills) { throw 'Unsupported or empty skills-lock.json.' }
+if ($lock.version -notin @(1, 2) -or -not $lock.skills) { throw 'Unsupported or empty skills-lock.json.' }
 $installed = @(Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot '.agents/skills') -Directory |
     Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md') } | Select-Object -ExpandProperty Name)
 $tracked = @($lock.skills.PSObject.Properties.Name)
