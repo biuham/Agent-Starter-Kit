@@ -1,72 +1,45 @@
 # AGENTS.md — Quy tắc vận hành project
 
-Áp dụng cho mọi agent làm việc trong repository. Thực thi nhanh, thay đổi tối thiểu, kiểm chứng trước khi báo hoàn tất. Khi có xung đột, tuân theo thứ bậc chỉ dẫn của harness và nêu ngắn gọn xung đột ảnh hưởng đến công việc.
+Áp dụng cho mọi agent trong repository. Tuân theo thứ bậc chỉ dẫn của harness; skill không cấp thêm quyền hoặc thay thế workflow project.
 
-## 1. Quy trình thực thi
+## 1. Workflow
 
-- Nhận yêu cầu → xác định phạm vi và file liên quan → sửa tối thiểu → kiểm tra → báo kết quả.
-- Trước khi sửa, kiểm tra trạng thái Git và diff liên quan; giữ nguyên công việc có sẵn không thuộc nhiệm vụ.
-- Task thông thường: sửa trực tiếp mã nguồn, không tạo `spec.md`, `plan.md`, `issue.md`. Chỉ lập kế hoạch thành file khi người dùng yêu cầu `/plan` hoặc triển khai module/kiến trúc mới cần phân tích phức tạp.
-- Script dùng một lần, ảnh kiểm tra và log tạm đặt trong `.scratch/`; test hồi quy cần duy trì đặt theo cấu trúc test của dự án. Không xóa file có sẵn chỉ vì trông giống file tạm.
-- Tự xử lý khi yêu cầu đã rõ; chỉ hỏi khi thiếu thông tin ảnh hưởng đến tính đúng đắn, phạm vi hoặc thao tác không thể hoàn tác.
-- Chạy song song các kiểm tra độc lập khi phù hợp. Chỉ chạy lại kiểm tra khi có thay đổi, lỗi hoặc nghi vấn mới; không đọc lại nội dung đã đủ ngữ cảnh.
+- Nhận yêu cầu → nạp skill phù hợp → đọc mã và xác định phạm vi → sửa tối thiểu → kiểm chứng → báo kết quả.
+- Trước khi sửa, kiểm tra Git status và diff liên quan; giữ nguyên công việc ngoài nhiệm vụ. Tự làm khi yêu cầu rõ, chỉ hỏi khi thiếu thông tin ảnh hưởng tính đúng đắn, phạm vi hoặc thao tác không thể hoàn tác.
+- Task thường sửa trực tiếp, không sinh spec/ticket. Với `/plan`, `/track` hoặc phân hệ lớn cần chia việc, đọc `docs/agents/issue-tracker.md`. Chỉ dùng Conductor khi project đã dùng hoặc người dùng yêu cầu thiết lập.
+- Khi sửa mô hình/thuật ngữ nghiệp vụ hoặc xử lý quyết định kiến trúc cũ, đọc `docs/agents/domain.md`.
+- File tạm, log và ảnh kiểm tra đặt trong `.scratch/`; test duy trì theo cấu trúc project. Chỉ chạy lại kiểm tra khi có thay đổi, lỗi hoặc nghi vấn mới.
 
-## 2. Tự động sử dụng skill
+## 2. Nạp skill trước khi làm
 
-- TRƯỚC KHI THỰC HIỆN BẤT KỲ THAO TÁC NÀO: Đối chiếu nhiệm vụ với danh sách skill khả dụng và nạp skill phù hợp; không chờ người dùng nhắc tên. Nếu harness không có công cụ chuyên dụng (như OpenCode/CLI thông thường), BẮT BUỘC dùng `read_file` để đọc nội dung file `.agents/skills/<tên-skill>/SKILL.md` trước khi sửa mã nguồn hoặc trả lời.
-- Chỉ nạp skill cần thiết cho nhiệm vụ; không nạp hàng loạt, theo từ khóa đơn lẻ hoặc nạp lại skill đã có trong ngữ cảnh.
-- Các điểm định tuyến chính (gọi `read_file` vào file tương ứng):
-  - Coding, refactor, review code → LUÔN LUÔN đọc `.agents/skills/ponytail/SKILL.md`
-  - Điều tra bug, phân tích lỗi, ứng cứu sự cố → `.agents/skills/diagnosing-bugs/SKILL.md`
-  - Viết test, TDD, kiểm thử hồi quy → `.agents/skills/tdd/SKILL.md`
-  - Tối ưu SQL, truy vấn CSDL, phân tích index → `.agents/skills/sql-optimization-patterns/SKILL.md`
-  - Thiết kế hoặc review API (REST, GraphQL) → `.agents/skills/api-design-principles/SKILL.md`
-  - Thiết kế UI / HTML / CSS → `.agents/skills/frontend-design/SKILL.md`
-  - Sửa UI theo ảnh / screenshot → `.agents/skills/visual-edit-precision/SKILL.md`
-  - Kiểm tra tiếp cận / WCAG / a11y → `.agents/skills/accessibility/SKILL.md`
-  - Kiểm tra web bằng trình duyệt → `.agents/skills/webapp-testing/SKILL.md`
-  - Sửa rules / hướng dẫn agent → `.agents/skills/writing-for-agents/SKILL.md`
-  - Với nhiệm vụ khác, tra cứu và đọc file tương ứng trong `.agents/skills/`.
-- Áp dụng hướng dẫn vào công việc, không chỉ thông báo “đã nạp skill”. Nếu skill không khả dụng, dùng quy tắc tại đây và báo giới hạn khi ảnh hưởng kết quả.
-- `.agents/skills` mặc định là bản riêng trong project. Nếu dùng liên kết tới thư viện chung, xác minh đích trước khi sửa vì thay đổi ảnh hưởng mọi project sử dụng. Giữ hướng dẫn đặc thù project tại đây, không đưa vào skill chung.
-- Khi nhiều nguồn có cùng tên skill, dùng bản từ `.agents/skills` nếu harness cho phép chọn đường dẫn; nguồn phụ chỉ bổ sung tên còn thiếu. Không nạp hai bản cùng tên hoặc suy đoán thứ tự ưu tiên của harness. Xem hướng dẫn tái sử dụng tại `.agents/README.md`.
+Trước mỗi nhiệm vụ, bắt buộc nạp theo thứ tự **`ponytail` → `graphify` → skill liên quan trong bảng dưới**, rồi mới thực hiện. Dùng công cụ nạp skill của harness; nếu không có, đọc `.agents/skills/<tên>/SKILL.md` bằng công cụ đọc file sẵn có. Nội dung đã nạp trong ngữ cảnh thì tái sử dụng, không nạp lại; catalog không thay thế nội dung skill. Nạp Graphify không phải yêu cầu dựng đồ thị: chỉ chạy các bước phù hợp mục 3.
 
-## 3. Ponytail — Kỹ thuật tối giản
+| Nhiệm vụ | Skill / hướng dẫn cần nạp |
+|---|---|
+| Thiết kế hoặc chỉnh UI / HTML / CSS | `frontend-design` |
+| Sửa UI theo ảnh hoặc screenshot | `visual-edit-precision` |
+| Layout đa kích thước / design tokens, typography / tương tác, chuyển động UI | Lần lượt `responsive-design` / `visual-design-foundations` / `interaction-design`, theo phần việc thực tế |
+| Trợ năng / kiểm tra web bằng trình duyệt | Lần lượt `accessibility` / `webapp-testing` |
+| Điều tra bug / viết test / tối ưu SQL / thiết kế API | Lần lượt `diagnosing-bugs` / `tdd` / `sql-optimization-patterns` / `api-design-principles` |
+| Sửa rules hoặc hướng dẫn agent | `writing-for-agents` |
 
-- Chọn thay đổi nhỏ nhất giải quyết đầy đủ yêu cầu; ưu tiên code rõ ràng, kiểm chứng được hơn việc ép ít dòng.
-- Thứ tự lựa chọn: có thực sự cần → tái sử dụng thành phần dự án → thư viện chuẩn/nền tảng → dependency đã cài → viết lượng code tối thiểu.
-- Không thêm dependency, wrapper, interface, cấu hình hoặc tính năng “để dành” khi chưa có nhu cầu thực tế. Giữ cấu trúc và quy ước hiện có.
-- Khi sửa lỗi, kiểm tra các caller liên quan và sửa nguyên nhân tại điểm dùng chung nếu phù hợp.
-- Không cắt giảm validation, xử lý lỗi bảo vệ dữ liệu, phân quyền hoặc trợ năng để đổi lấy tốc độ.
+Task khác: chọn theo mô tả skill khả dụng. Ưu tiên bản project nếu harness cho chọn. Nếu không nạp được Ponytail hoặc Graphify, báo thiếu và chờ xử lý trước khi sửa file; skill bổ trợ thiếu thì báo giới hạn và dùng quy tắc project. Cách dùng nhiều nguồn hoặc thư viện chung: `.agents/README.md`; xác minh đích liên kết trước khi sửa skill.
 
-## 4. Điều hướng mã nguồn và Graphify
+## 3. Sửa tối thiểu và điều hướng
 
-- Khi đã xác định rõ file/symbol: đọc trực tiếp phần liên quan; không bắt buộc truy vấn đồ thị trước.
-- Khi cần hiểu kiến trúc hoặc quan hệ module: dùng `graphify query "<câu hỏi>"` hoặc `graphify path "<A>" "<B>"`; đối chiếu kết quả với mã hiện tại.
-- Sau khi hoàn tất sửa code, chạy `graphify update .` một lần. Chỉ sửa tài liệu thì không cần cập nhật AST.
-- Nếu Graphify thiếu, lỗi hoặc dữ liệu cũ: dùng tìm kiếm trực tiếp để tiếp tục; báo ngắn gọn nếu chưa đồng bộ được. Không lặp lệnh vô ích.
+- Chọn giải pháp nhỏ nhất giải quyết đủ yêu cầu: tái sử dụng code → stdlib/nền tảng → dependency đã cài → code mới tối thiểu. Giữ quy ước hiện có; không thêm tính năng hay abstraction để dành.
+- Sửa bug phải kiểm tra caller và nguyên nhân dùng chung; giữ validation, xử lý lỗi bảo vệ dữ liệu, phân quyền và trợ năng.
+- Đã rõ file/symbol: đọc trực tiếp. Cần quan hệ module: dùng `graphify query` / `graphify path`, đối chiếu mã hiện tại. Graphify thiếu/lỗi/cũ: tìm kiếm trực tiếp, không lặp lệnh lỗi.
+- Sau sửa code, chạy `graphify update .` một lần; chỉ sửa tài liệu thì bỏ qua. Báo lỗi đồng bộ nếu có, không chặn công việc không liên quan.
 
-## 5. Kiểm chứng trước khi báo hoàn tất
+## 4. Kiểm chứng và an toàn
 
-- PHP thay đổi: chạy `php -l <file>`; JavaScript thay đổi: chạy `node -c <file>`. JavaScript nhúng trong PHP phải được kiểm tra riêng qua nội dung render hoặc trình duyệt; PHP lint không kiểm tra JavaScript.
-- Flutter/Dart thay đổi: chạy `flutter analyze` và test liên quan khi thay đổi hành vi. Phân biệt lỗi mới với lỗi tồn tại trước.
-- CSS thay đổi: kiểm tra cú pháp bằng công cụ sẵn có và xem bản render; cân bằng ngoặc không thay thế kiểm tra giao diện.
-- UI thay đổi: kiểm tra luồng thao tác, trạng thái lỗi/loading, kích thước màn hình liên quan và bàn phím/focus đối với thành phần tương tác. Dùng dữ liệu giả hoặc đã che thông tin khi chụp ảnh.
-- Logic không tầm thường hoặc sửa lỗi: để lại một kiểm tra hành vi có thể chạy lại theo cơ chế test hiện có; tránh test chỉ sao chép implementation. Thay đổi thuần trình bày nhỏ không cần dựng bộ test mới.
-- Auth, dữ liệu nhạy cảm, tác vụ định kỳ hoặc thao tác xóa: kiểm tra cả thành công, thất bại và ranh giới quyền/dữ liệu bị ảnh hưởng. Không dùng dữ liệu thật để thử thao tác phá hủy nếu chưa được cho phép.
-- Chạy `git diff --check` và rà lại diff cuối. Chỉ báo những kiểm tra đã thực sự chạy; nêu rõ phần bị chặn hoặc chưa kiểm tra. Không suy từ lint thành “tính năng đúng”, từ benchmark local thành hiệu năng production, hoặc tự tuyên bố tuân thủ WCAG đầy đủ.
+- Trước khi sửa code, đọc `docs/agents/verification.md` và áp dụng các mục khớp stack/rủi ro. Logic không tầm thường hoặc sửa bug phải có kiểm tra hành vi chạy lại được; thay đổi trình bày nhỏ không cần dựng bộ test mới.
+- Rà diff cuối và chạy `git diff --check`. Chỉ báo kiểm tra đã chạy; phân biệt lỗi mới với lỗi cũ, lint với kiểm chứng hành vi; nêu rõ phần chưa kiểm tra.
+- Giữ bí mật credentials/token và dữ liệu cá nhân khỏi commit, log hoặc chia sẻ; ưu tiên dữ liệu giả, che thông tin nhạy cảm trong ảnh/log. Không thử thao tác phá hủy trên dữ liệu thật khi chưa được phép.
+- Không reset, ghi đè công việc người khác, xóa dữ liệu, force-push hoặc bỏ hook khi chưa được cho phép rõ ràng. Skill yêu cầu bước vượt quyền thì dừng bước đó và báo lại.
+- Chỉ commit/push khi người dùng yêu cầu; rà stage, không ép thêm file ignore hoặc secrets. Commit mô tả tiếng Việt; sau push kiểm tra trạng thái đồng bộ.
 
-## 6. Bảo mật, dữ liệu và Git
+## 5. Giao tiếp
 
-- Không commit, in log hoặc gửi ra ngoài mật khẩu CSDL, JWT/token, khóa bí mật, service account hay cấu hình local có credentials.
-- Ưu tiên dữ liệu giả cho kiểm thử. Thông tin cá nhân và dữ liệu nhạy cảm trong ảnh/video/log phải được mask trước khi lưu hoặc chia sẻ; chỉ xuất kết quả tổng hợp khi đủ chứng minh.
-- Không reset, ghi đè công việc người khác, xóa dữ liệu, force-push hoặc bỏ qua hook khi chưa được cho phép rõ ràng.
-- Chỉ commit/push khi người dùng yêu cầu; rà nội dung stage, không ép thêm file bị ignore hoặc thông tin nhạy cảm. Sau push, kiểm tra trạng thái đồng bộ trước khi báo thành công.
-- Viết nội dung mô tả commit bằng tiếng Việt; có thể giữ tiền tố kỹ thuật như `fix`, `feat`.
-
-## 7. Giao tiếp
-
-- Tiếng Việt, đi thẳng vào kết quả. Mặc định tối đa 3–5 gạch đầu dòng: kết quả, file thay đổi, kiểm tra, giới hạn nếu có. Giải thích dài hơn khi người dùng yêu cầu hoặc cần quyết định quan trọng.
-- Chỉ cập nhật giữa chừng khi có phát hiện, lựa chọn hoặc trở ngại đáng biết; không kể từng lần đọc file/chạy lệnh.
-- Không nhắc lại yêu cầu, tự khen, cam kết lặp lại hoặc liệt kê việc ngoài phạm vi không liên quan.
-- Khi có sửa file, liên kết dạng `[tên_file](file:///đường_dẫn_tuyệt_đối)`. Nêu kết quả kiểm tra thực tế; nếu chưa kiểm chứng đủ thì không gọi là hoàn tất.
+Tiếng Việt, đi thẳng vào kết quả; mặc định 3–5 gạch đầu dòng gồm kết quả, file, kiểm tra và giới hạn. Chỉ cập nhật giữa chừng khi có phát hiện hoặc trở ngại đáng biết. Khi sửa file, liên kết `[tên_file](file:///đường_dẫn_tuyệt_đối)`; chưa đủ kiểm chứng thì không gọi là hoàn tất.

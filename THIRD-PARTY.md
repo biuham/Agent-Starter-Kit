@@ -4,7 +4,8 @@ Giấy phép MIT tại root chỉ áp dụng phần tự viết của kit, khôn
 
 ## Bằng chứng hiện có
 
-- `skills-lock.json` ghi nguồn của 18 mục (Matt Pocock, Anthropic, Addy Osmani và wshobson); đây không phải danh mục xuất xứ đầy đủ cho 63 skill.
+- `skills-lock.json` ghi nguồn của 19 mục (Matt Pocock, Anthropic, Addy Osmani, wshobson và Graphify Labs); đây không phải danh mục xuất xứ đầy đủ cho 64 skill.
+- Graphify lấy từ `Graphify-Labs/graphify`, commit `480b61ed91cbc08177dc2c60caa9ffd6c9b95749`: `graphify/skill.md` và `graphify/skills/agents/references/`. Giữ nguyên `LICENSE` (Apache-2.0), `LICENSE-MIT` và `NOTICE` trong `.agents/skills/graphify/`.
 - `.agents/skills/frontend-design/LICENSE.txt` và `.agents/skills/webapp-testing/LICENSE.txt` chứa thông báo giấy phép riêng, cần giữ cùng nội dung khi phân phối.
 - Một số skill có metadata/tham chiếu nguồn trong `SKILL.md`; đọc cả tài nguyên đi kèm, không chỉ file hướng dẫn chính.
 
@@ -14,4 +15,4 @@ Giấy phép MIT tại root chỉ áp dụng phần tự viết của kit, khôn
 2. Giữ copyright, license, NOTICE và các hạn chế áp dụng cho tài nguyên phụ.
 3. Đối chiếu bản vendored với upstream trước khi ghi nguồn/hash mới vào lockfile. Hash hiện có không tự chứng minh quyền phân phối.
 
-Chưa audit đầy đủ nguồn/giấy phép của 63 skill. Không khẳng định toàn bộ thư viện được phép cấp lại theo MIT hay đã sẵn sàng cho mọi mục đích thương mại. Tài liệu này ghi rõ giới hạn, không phải kết luận pháp lý.
+Chưa audit đầy đủ nguồn/giấy phép của 64 skill. Không khẳng định toàn bộ thư viện được phép cấp lại theo MIT hay đã sẵn sàng cho mọi mục đích thương mại. Tài liệu này ghi rõ giới hạn, không phải kết luận pháp lý.

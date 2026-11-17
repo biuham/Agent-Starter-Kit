@@ -41,7 +41,7 @@ Copy thành công chỉ chứng minh file có trên đĩa. Việc đọc `AGENTS
 .\update-skills.ps1 -Apply   # Cho phép chạy npx skills update --project
 ```
 
-Hiện thư viện có 63 skill nhưng lockfile chỉ có 18 mục; trong đó một số mục thiếu `skillPath`. Không suy diễn lockfile quản lý đủ thư viện hoặc tự bịa nguồn/hash để lấp chỗ trống. Lệnh mặc định liệt kê skill không được quản lý, mục thiếu trên đĩa và mục legacy có thể bị CLI bỏ qua.
+Hiện thư viện có 64 skill nhưng lockfile chỉ có 19 mục. Graphify đã được bổ sung cùng tài liệu tham chiếu và giấy phép upstream. Không suy diễn lockfile quản lý đủ thư viện hoặc tự bịa nguồn/hash để lấp chỗ trống. Lệnh mặc định liệt kê skill không được quản lý, mục thiếu trên đĩa và mục legacy có thể bị CLI bỏ qua.
 
 `-Apply` yêu cầu Node.js/npx và mạng, tạo backup `.agents` cùng lockfile trong `.scratch/`, chạy CLI tại đúng thư mục project và báo lỗi khi exit code khác 0. Upstream có thể thay thế các chỉnh sửa riêng; backup không phải rollback tự động. Xem cảnh báo CLI và `git diff` sau khi chạy, không coi exit 0 là bằng chứng tất cả skill đã được cập nhật. `npx` có thể tải/chạy phiên bản CLI mới; chỉ dùng khi tin cậy nguồn.
 
@@ -58,7 +58,7 @@ Test dùng project giả trong `.scratch/`, không gọi npx thật. Kiểm tra 
 ## Phạm vi skill và hành vi agent
 
 - Với PHP, MySQL, Flutter, Vanilla JS và REST API, bộ hiện tại có nền tảng API/auth, SQL, UI, trợ năng và kiểm thử. Không cần thêm skill chỉ để tăng số lượng; thiếu hướng dẫn chuyên biệt PHP/MySQL/Flutter thì dùng tài liệu chính thức và quy ước project theo task thực tế. Skill PostgreSQL chỉ nạp khi dùng PostgreSQL, không áp dụng máy móc cho MySQL.
-- Có nhóm nội dung chồng lấn (review, debugging, accessibility); chỉ nạp skill khớp nhiệm vụ, không chạy tất cả. 63 là số hiện tại, không phải mục tiêu cố định hay bảo đảm ngân sách context trên mọi model/harness.
+- Ponytail và Graphify là hai skill nền, nạp trước rồi mới chọn skill chuyên môn khớp nhiệm vụ theo `AGENTS.md`; nạp Graphify không tự động yêu cầu dựng đồ thị. Các nhóm review, debugging, accessibility có nội dung chồng lấn, không chạy tất cả. 64 là số hiện tại, không phải mục tiêu cố định hay bảo đảm ngân sách context trên mọi model/harness.
 - OpenCode hỗ trợ `.agents/skills` theo [tài liệu discovery](https://opencode.ai/docs/skills/). Catalog chỉ quảng bá metadata, model phải gọi công cụ để nạp nội dung; dùng Gemini qua router không tạo bảo đảm model luôn gọi đúng. Giữ trigger rõ trong `AGENTS.md`, kiểm tra tool trace trên task mẫu trước khi kết luận, không cần thêm system prompt lặp lại khi chưa thấy lỗi cụ thể.
 - Task thường sửa trực tiếp; `.scratch/` vẫn dùng cho log, ảnh và script tạm. Chỉ hạn chế việc tự sinh hồ sơ kế hoạch cho task nhỏ, không cấm vùng scratch. Tài liệu nghiệp vụ cần đọc khi task liên quan, không chỉ khi làm Epic.
 

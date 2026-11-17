@@ -6,7 +6,7 @@
 
 ## Chọn và dùng skill
 
-Chỉ nạp skill phù hợp nhiệm vụ. Với skill trùng tên ở nhiều nguồn, dùng bản project nếu harness cho chọn đường dẫn; không nạp hai bản và không suy đoán thứ tự ưu tiên. Sau khi cài/sửa metadata, mở phiên mới rồi kiểm tra catalog thực tế. Trigger là hướng dẫn lựa chọn, không bảo đảm hành vi.
+Nạp hai skill nền theo thứ tự Ponytail → Graphify trước, rồi chọn skill chuyên môn phù hợp nhiệm vụ theo `AGENTS.md`; nội dung còn trong ngữ cảnh không cần nạp lại. Với skill trùng tên ở nhiều nguồn, dùng bản project nếu harness cho chọn đường dẫn; không nạp hai bản và không suy đoán thứ tự ưu tiên. Sau khi cài/sửa metadata, mở phiên mới rồi kiểm tra catalog thực tế. Trigger là hướng dẫn lựa chọn, không bảo đảm hành vi.
 
 Nếu chủ động chuyển sang junction/thư viện chung, ghi rõ đích tại tài liệu project: sửa qua liên kết ảnh hưởng mọi project dùng thư viện. Installer/updater của kit từ chối đường dẫn liên kết để tránh sửa nhầm nguồn chung.
 
