@@ -57,7 +57,7 @@ Test dùng project giả trong `.scratch/`, không gọi npx thật. Kiểm tra 
 
 ## Phạm vi skill và hành vi agent
 
-- Với PHP, MySQL, Flutter, Vanilla JS và REST API, bộ hiện tại có nền tảng API/auth, SQL, UI, trợ năng và kiểm thử. Không cần thêm skill chỉ để tăng số lượng; thiếu hướng dẫn chuyên biệt PHP/MySQL/Flutter thì dùng tài liệu chính thức và quy ước project theo task thực tế. Skill PostgreSQL chỉ nạp khi dùng PostgreSQL, không áp dụng máy móc cho MySQL.
+- Với PHP, MySQL, Flutter, Vanilla JS và REST API, kit có nền tảng API/auth, SQL, UI, trợ năng và kiểm thử. Dùng [`flutter-dart`](.agents/skills/flutter-dart/SKILL.md) cho widget, state và test Flutter. Các skill cho stack khác vẫn có sẵn để dùng khi phù hợp; không áp dụng hướng dẫn riêng của PostgreSQL cho MySQL hay Compose/SwiftUI cho widget Flutter.
 - Ponytail và Graphify là hai skill nền, nạp trước rồi mới chọn skill chuyên môn khớp nhiệm vụ theo `AGENTS.md`; nạp Graphify không tự động yêu cầu dựng đồ thị. Các nhóm review, debugging, accessibility có nội dung chồng lấn, không chạy tất cả.
 - OpenCode hỗ trợ `.agents/skills` theo [tài liệu discovery](https://opencode.ai/docs/skills/). Catalog chỉ quảng bá metadata, model phải gọi công cụ để nạp nội dung; dùng Gemini qua router không tạo bảo đảm model luôn gọi đúng. Giữ trigger rõ trong `AGENTS.md`, kiểm tra tool trace trên task mẫu trước khi kết luận, không cần thêm system prompt lặp lại khi chưa thấy lỗi cụ thể.
 - Task thường sửa trực tiếp; `.scratch/` vẫn dùng cho log, ảnh và script tạm. Chỉ hạn chế việc tự sinh hồ sơ kế hoạch cho task nhỏ, không cấm vùng scratch. Tài liệu nghiệp vụ cần đọc khi task liên quan, không chỉ khi làm Epic.

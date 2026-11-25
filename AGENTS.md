@@ -16,7 +16,8 @@ Trước mỗi nhiệm vụ, bắt buộc nạp theo thứ tự **`ponytail` →
 
 | Nhiệm vụ | Skill / hướng dẫn cần nạp |
 |---|---|
-| Thiết kế hoặc chỉnh UI / HTML / CSS | `frontend-design` |
+| Thiết kế hoặc chỉnh UI web (HTML/CSS) | `frontend-design` |
+| Sửa widget, layout, state hoặc test trong app Flutter; sửa mã Dart trong app | `flutter-dart` |
 | Sửa UI theo ảnh hoặc screenshot | `visual-edit-precision` |
 | Layout đa kích thước / design tokens, typography / tương tác, chuyển động UI | Lần lượt `responsive-design` / `visual-design-foundations` / `interaction-design`, theo phần việc thực tế |
 | Trợ năng / kiểm tra web bằng trình duyệt | Lần lượt `accessibility` / `webapp-testing` |
