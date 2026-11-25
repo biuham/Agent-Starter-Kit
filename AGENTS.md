@@ -12,7 +12,7 @@
 
 ## 2. Nạp skill trước khi làm
 
-Trước mỗi nhiệm vụ, bắt buộc nạp theo thứ tự **`ponytail` → `graphify` → skill liên quan trong bảng dưới**, rồi mới thực hiện. Dùng công cụ nạp skill của harness; nếu không có, đọc `.agents/skills/<tên>/SKILL.md` bằng công cụ đọc file sẵn có. Nội dung đã nạp trong ngữ cảnh thì tái sử dụng, không nạp lại; catalog không thay thế nội dung skill. Nạp Graphify không phải yêu cầu dựng đồ thị: chỉ chạy các bước phù hợp mục 3.
+Trước mỗi nhiệm vụ, bắt buộc nạp theo thứ tự **`ponytail` → `graphify` → skill liên quan trong bảng dưới**, rồi mới thực hiện. Dùng công cụ nạp skill của harness và ưu tiên bản trong repo. Nếu không có công cụ, công cụ không tìm thấy skill, hoặc nạp bản ngoài repo trong khi repo có bản riêng, đọc trực tiếp `.agents/skills/<tên>/SKILL.md`. Tái sử dụng nội dung đúng bản đã nạp trong ngữ cảnh; catalog không thay thế nội dung skill. Nạp Graphify không phải yêu cầu dựng đồ thị: chỉ chạy các bước phù hợp mục 3.
 
 | Nhiệm vụ | Skill / hướng dẫn cần nạp |
 |---|---|
@@ -24,7 +24,7 @@ Trước mỗi nhiệm vụ, bắt buộc nạp theo thứ tự **`ponytail` →
 | Audit bảo mật / pen-test toàn bộ codebase | `security-audit` *(chỉ dùng khi kiểm tra bảo mật chuyên sâu)* |
 | Sửa rules hoặc hướng dẫn agent | `writing-for-agents` |
 
-Task khác: chọn theo mô tả skill khả dụng. Ưu tiên bản project nếu harness cho chọn. Nếu không nạp được Ponytail hoặc Graphify, báo thiếu và chờ xử lý trước khi sửa file; skill bổ trợ thiếu thì báo giới hạn và dùng quy tắc project. Cách dùng nhiều nguồn hoặc thư viện chung: `.agents/README.md`; xác minh đích liên kết trước khi sửa skill.
+Task khác: chọn theo mô tả skill khả dụng. Nếu không nạp được Ponytail hoặc Graphify, báo thiếu và chờ xử lý trước khi sửa file; skill bổ trợ thiếu thì báo giới hạn và dùng quy tắc project. Cách dùng nhiều nguồn hoặc thư viện chung: `.agents/README.md`; xác minh đích liên kết trước khi sửa skill.
 
 ## 3. Sửa tối thiểu và điều hướng
 
