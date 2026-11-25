@@ -2,7 +2,7 @@
 
 Áp dụng các mục khớp stack và rủi ro; project nhận kit điều chỉnh lệnh theo cấu trúc test thực tế.
 
-- **Script kit:** sửa `setup.ps1`, `update-skills.ps1`, `kit-safety.ps1` hoặc test của kit thì chạy `powershell -NoProfile -File .\tests\scripts.ps1` tại root starter kit. Installer không copy `tests/` sang project nhận kit.
+- **Script kit:** sửa `tools/agent-kit/` (`setup.ps1`, `update-skills.ps1`, `kit-safety.ps1`) hoặc test của kit thì chạy `powershell -NoProfile -File .\tests\scripts.ps1` tại root starter kit. Installer không copy `tests/` sang project nhận kit.
 - **PHP:** chạy `php -l <file>` cho file thay đổi.
 - **JavaScript:** chạy `node -c <file>`. JavaScript nhúng trong PHP phải kiểm tra riêng qua nội dung render hoặc trình duyệt; PHP lint không kiểm tra JavaScript.
 - **Flutter/Dart:** chạy `flutter analyze` và test liên quan khi thay đổi hành vi.

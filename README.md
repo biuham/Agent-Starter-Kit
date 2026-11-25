@@ -10,7 +10,7 @@ Clone kit vào một thư mục riêng (không clone đè lên project), đọc 
 
 ```powershell
 git clone https://github.com/biuham/Agent-Starter-Kit.git C:\tools\agent-starter-kit
-& C:\tools\agent-starter-kit\setup.ps1 -TargetDir C:\work\my-project
+& C:\tools\agent-starter-kit\tools\agent-kit\setup.ps1 -TargetDir C:\work\my-project
 ```
 
 Thay đường dẫn theo máy mình. Thư mục project phải tồn tại. Script kiểm tra toàn bộ đích trước khi copy, dừng nếu gặp file/thư mục có sẵn hoặc symlink/junction trong đường dẫn được dùng; không merge, ghi đè hay xóa tự động. Lỗi I/O giữa chừng có thể để lại bản cài một phần: kiểm tra các file đã copy trước khi thử lại.
@@ -22,7 +22,7 @@ Installer copy:
 - `.agents/`: rules bổ trợ và các thư mục skill độc lập, không tạo junction.
 - `docs/agents/`: tài liệu nghiệp vụ và quy ước task tùy chọn.
 - `docs/agents/kit/`: giấy phép và ghi chú nguồn của kit, không ghi đè LICENSE của project.
-- `skills-lock.json`, `setup.ps1`, `update-skills.ps1`, `kit-safety.ps1`: metadata và script để tiếp tục dùng trong project mới.
+- `skills-lock.json` và `tools/agent-kit/` (`setup.ps1`, `update-skills.ps1`, `kit-safety.ps1`): metadata và script để tiếp tục dùng trong project mới.
 
 Có thể bật **Template repository** trong GitHub Settings để tạo repo mới từ kit. Với project đã có mã nguồn, dùng cách cài có kiểm tra xung đột ở trên.
 
@@ -37,8 +37,8 @@ Copy thành công chỉ chứng minh file có trên đĩa. Việc đọc `AGENTS
 ## Cập nhật và giữ chỉnh sửa riêng
 
 ```powershell
-.\update-skills.ps1          # Chỉ kiểm kê local, không gọi mạng/không sửa file
-.\update-skills.ps1 -Apply   # Cho phép chạy npx skills update --project
+.\tools\agent-kit\update-skills.ps1          # Chỉ kiểm kê local, không gọi mạng/không sửa file
+.\tools\agent-kit\update-skills.ps1 -Apply   # Cho phép chạy npx skills update --project
 ```
 
 Hiện thư viện có 64 skill nhưng lockfile chỉ có 19 mục. Graphify đã được bổ sung cùng tài liệu tham chiếu và giấy phép upstream. Không suy diễn lockfile quản lý đủ thư viện hoặc tự bịa nguồn/hash để lấp chỗ trống. Lệnh mặc định liệt kê skill không được quản lý, mục thiếu trên đĩa và mục legacy có thể bị CLI bỏ qua.

@@ -5,16 +5,17 @@ param(
 
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'kit-safety.ps1')
+$kitRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $TargetDir = [IO.Path]::GetFullPath($TargetDir)
 if (-not (Test-Path -LiteralPath $TargetDir -PathType Container)) {
     throw 'TargetDir must be an existing project directory.'
 }
-$paths = @('AGENTS.md', '.agents', 'docs/agents', 'skills-lock.json', 'setup.ps1', 'update-skills.ps1', 'kit-safety.ps1')
+$paths = @('AGENTS.md', '.agents', 'docs/agents', 'skills-lock.json', 'tools/agent-kit/setup.ps1', 'tools/agent-kit/update-skills.ps1', 'tools/agent-kit/kit-safety.ps1')
 # Keep kit notices without colliding with the target project's own LICENSE.
 $notices = @('LICENSE', 'THIRD-PARTY.md')
 # Validate the complete batch before writing anything.
 foreach ($path in $paths) {
-    $source = Join-Path $PSScriptRoot $path
+    $source = Join-Path $kitRoot $path
     $target = Join-Path $TargetDir $path
     if (-not (Test-Path -LiteralPath $source)) { throw "Missing kit file: $source" }
     Assert-KitPlainPath $source -Recurse
@@ -22,9 +23,9 @@ foreach ($path in $paths) {
     if (Test-Path -LiteralPath $target) { throw "Destination already exists; review and merge manually: $target" }
 }
 foreach ($notice in $notices) {
-    $source = Join-Path $PSScriptRoot $notice
+    $source = Join-Path $kitRoot $notice
     # Installed copies store notices here instead of at the project root.
-    if (-not (Test-Path -LiteralPath $source)) { $source = Join-Path $PSScriptRoot "docs/agents/kit/$notice" }
+    if (-not (Test-Path -LiteralPath $source)) { $source = Join-Path $kitRoot "docs/agents/kit/$notice" }
     if (-not (Test-Path -LiteralPath $source -PathType Leaf)) { throw "Missing kit notice: $notice" }
     Assert-KitPlainPath $source
 }
@@ -34,13 +35,13 @@ foreach ($path in $paths) {
     if (-not (Test-Path -LiteralPath $parent)) {
         New-Item -ItemType Directory -Path $parent | Out-Null
     }
-    Copy-Item -LiteralPath (Join-Path $PSScriptRoot $path) -Destination $target -Recurse
+    Copy-Item -LiteralPath (Join-Path $kitRoot $path) -Destination $target -Recurse
 }
 $noticeDir = Join-Path $TargetDir 'docs/agents/kit'
 if (-not (Test-Path -LiteralPath $noticeDir)) { New-Item -ItemType Directory -Path $noticeDir | Out-Null }
 foreach ($notice in $notices) {
-    $source = Join-Path $PSScriptRoot $notice
-    if (-not (Test-Path -LiteralPath $source)) { $source = Join-Path $PSScriptRoot "docs/agents/kit/$notice" }
+    $source = Join-Path $kitRoot $notice
+    if (-not (Test-Path -LiteralPath $source)) { $source = Join-Path $kitRoot "docs/agents/kit/$notice" }
     if (-not (Test-Path -LiteralPath (Join-Path $noticeDir $notice))) {
         Copy-Item -LiteralPath $source -Destination $noticeDir
     }

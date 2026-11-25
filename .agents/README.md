@@ -2,7 +2,7 @@
 
 - `AGENTS.md` ở root: workflow, kiểm chứng và bảo mật; điều chỉnh theo project hiện tại.
 - `rules/`: Ponytail và Graphify bổ trợ. Metadata `always_on` chỉ có tác dụng nếu harness hỗ trợ; `AGENTS.md` vẫn chứa quy trình cốt lõi.
-- `skills/`: các thư mục thật được mang theo repo. Cài bằng `setup.ps1` tạo bản riêng trong project, không liên kết tới một đường dẫn cá nhân.
+- `skills/`: các thư mục thật được mang theo repo. Cài bằng `tools/agent-kit/setup.ps1` tạo bản riêng trong project, không liên kết tới một đường dẫn cá nhân.
 
 ## Chọn và dùng skill
 
@@ -12,4 +12,4 @@ Nếu chủ động chuyển sang junction/thư viện chung, ghi rõ đích t�
 
 ## Bảo trì
 
-Chạy `update-skills.ps1` ở root để kiểm kê local; xem README root trước khi dùng `-Apply`. Lockfile hiện chưa bao phủ đủ thư viện. Giữ chỉnh sửa riêng, kiểm tra nguồn và giấy phép trước khi thay skill; không sửa nội dung bên thứ ba hàng loạt chỉ để đồng bộ phong cách tài liệu.
+Chạy `.\tools\agent-kit\update-skills.ps1` ở root để kiểm kê local; xem README root trước khi dùng `-Apply`. Lockfile hiện chưa bao phủ đủ thư viện. Giữ chỉnh sửa riêng, kiểm tra nguồn và giấy phép trước khi thay skill; không sửa nội dung bên thứ ba hàng loạt chỉ để đồng bộ phong cách tài liệu.

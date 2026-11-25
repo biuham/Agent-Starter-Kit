@@ -11,7 +11,7 @@ function Expect-Failure([scriptblock]$Action, [string]$Pattern) {
     Assert ($caught -and $caught -like $Pattern) "Expected failure: $Pattern; got: $caught"
 }
 # Parse scripts without executing external commands.
-foreach ($file in @('setup.ps1', 'update-skills.ps1', 'kit-safety.ps1', 'tests/scripts.ps1')) {
+foreach ($file in @('tools/agent-kit/setup.ps1', 'tools/agent-kit/update-skills.ps1', 'tools/agent-kit/kit-safety.ps1', 'tests/scripts.ps1')) {
     $tokens = $null
     $errors = $null
     [void][Management.Automation.Language.Parser]::ParseFile((Join-Path $root $file), [ref]$tokens, [ref]$errors)
@@ -19,27 +19,27 @@ foreach ($file in @('setup.ps1', 'update-skills.ps1', 'kit-safety.ps1', 'tests/s
 }
 $project = Join-Path $sandbox 'new-project'
 New-Item -ItemType Directory -Path $project | Out-Null
-& (Join-Path $root 'setup.ps1') -TargetDir $project
+& (Join-Path $root 'tools/agent-kit/setup.ps1') -TargetDir $project
 Assert (Test-Path -LiteralPath (Join-Path $project '.agents/skills/ponytail/SKILL.md')) 'Skill was not copied.'
-Assert (Test-Path -LiteralPath (Join-Path $project 'update-skills.ps1')) 'Updater was not copied.'
+Assert (Test-Path -LiteralPath (Join-Path $project 'tools/agent-kit/update-skills.ps1')) 'Updater was not copied.'
 Assert (Test-Path -LiteralPath (Join-Path $project 'docs/agents/kit/LICENSE')) 'Kit license was not copied.'
 $before = (Get-FileHash -LiteralPath (Join-Path $project 'AGENTS.md')).Hash
-Expect-Failure { & (Join-Path $root 'setup.ps1') -TargetDir $project } '*already exists*'
+Expect-Failure { & (Join-Path $root 'tools/agent-kit/setup.ps1') -TargetDir $project } '*already exists*'
 Assert ((Get-FileHash -LiteralPath (Join-Path $project 'AGENTS.md')).Hash -eq $before) 'Existing rules changed.'
 
 $conflict = Join-Path $sandbox 'late-conflict'
 New-Item -ItemType Directory -Path $conflict | Out-Null
 Set-Content -LiteralPath (Join-Path $conflict 'skills-lock.json') -Value 'keep me'
-Expect-Failure { & (Join-Path $root 'setup.ps1') -TargetDir $conflict } '*already exists*'
+Expect-Failure { & (Join-Path $root 'tools/agent-kit/setup.ps1') -TargetDir $conflict } '*already exists*'
 Assert (-not (Test-Path -LiteralPath (Join-Path $conflict 'AGENTS.md'))) 'Preflight wrote partial files.'
 
 # A project reached via a junction must not modify its real destination.
 $linked = Join-Path $sandbox 'linked-project'
 New-Item -ItemType Junction -Path $linked -Target $conflict | Out-Null
-Expect-Failure { & (Join-Path $root 'setup.ps1') -TargetDir $linked } '*Linked path*'
+Expect-Failure { & (Join-Path $root 'tools/agent-kit/setup.ps1') -TargetDir $linked } '*Linked path*'
 Assert (-not (Test-Path -LiteralPath (Join-Path $conflict 'AGENTS.md'))) 'Junction target changed.'
 
-$updater = Join-Path $project 'update-skills.ps1'
+$updater = Join-Path $project 'tools/agent-kit/update-skills.ps1'
 $global:kitTestNpxCalled = $false
 function global:npx.cmd {
     $global:kitTestNpxCalled = $true
@@ -67,10 +67,12 @@ try {
 }
 
 $linkedUpdater = Join-Path $sandbox 'linked-updater'
-New-Item -ItemType Directory -Path $linkedUpdater | Out-Null
-foreach ($file in @('update-skills.ps1', 'kit-safety.ps1', 'skills-lock.json')) {
-    Copy-Item -LiteralPath (Join-Path $root $file) -Destination $linkedUpdater
+$linkedTools = Join-Path $linkedUpdater 'tools/agent-kit'
+New-Item -ItemType Directory -Path $linkedTools -Force | Out-Null
+foreach ($file in @('tools/agent-kit/update-skills.ps1', 'tools/agent-kit/kit-safety.ps1')) {
+    Copy-Item -LiteralPath (Join-Path $root $file) -Destination $linkedTools
 }
+Copy-Item -LiteralPath (Join-Path $root 'skills-lock.json') -Destination $linkedUpdater
 New-Item -ItemType Junction -Path (Join-Path $linkedUpdater '.agents') -Target (Join-Path $project '.agents') | Out-Null
-Expect-Failure { & (Join-Path $linkedUpdater 'update-skills.ps1') } '*Linked path*'
+Expect-Failure { & (Join-Path $linkedTools 'update-skills.ps1') } '*Linked path*'
 Write-Host "PASS: parse, install, conflicts, junctions, inventory, scoped updater, backup and exit handling. Fixtures: $sandbox"
