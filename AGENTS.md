@@ -21,6 +21,7 @@ Trước mỗi nhiệm vụ, bắt buộc nạp theo thứ tự **`ponytail` →
 | Layout đa kích thước / design tokens, typography / tương tác, chuyển động UI | Lần lượt `responsive-design` / `visual-design-foundations` / `interaction-design`, theo phần việc thực tế |
 | Trợ năng / kiểm tra web bằng trình duyệt | Lần lượt `accessibility` / `webapp-testing` |
 | Điều tra bug / viết test / tối ưu SQL / thiết kế API | Lần lượt `diagnosing-bugs` / `tdd` / `sql-optimization-patterns` / `api-design-principles` |
+| Audit bảo mật / pen-test toàn bộ codebase | `security-audit` *(chỉ dùng khi kiểm tra bảo mật chuyên sâu)* |
 | Sửa rules hoặc hướng dẫn agent | `writing-for-agents` |
 
 Task khác: chọn theo mô tả skill khả dụng. Ưu tiên bản project nếu harness cho chọn. Nếu không nạp được Ponytail hoặc Graphify, báo thiếu và chờ xử lý trước khi sửa file; skill bổ trợ thiếu thì báo giới hạn và dùng quy tắc project. Cách dùng nhiều nguồn hoặc thư viện chung: `.agents/README.md`; xác minh đích liên kết trước khi sửa skill.

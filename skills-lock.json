@@ -46,9 +46,9 @@
     "graphify": {
       "source": "Graphify-Labs/graphify",
       "sourceType": "github",
-      "skillPath": "graphify/skill.md",
-      "commit": "480b61ed91cbc08177dc2c60caa9ffd6c9b95749",
-      "computedHash": "bbddbc077b4374a2d6b5181e0d9d0e7cac576df46dff328d7934a1c2f077bc4d"
+      "skillPath": "graphify/SKILL.md",
+      "commit": "14f35e381cab8d0ae10824a336114a907c288146",
+      "computedHash": "98f7d4c42470dfdd8b065ac57b1f122a3051fb600ade7b26a177ec85daa58896"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -98,6 +98,13 @@
       "skillPath": "skills/engineering/research/SKILL.md",
       "computedHash": "7662666af51f8b1672ed7d88360d4b82656da21bb7b11c49e956eeb3036b85d5",
       "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa"
+    },
+    "security-audit": {
+      "source": "cloudflare/security-audit-skill",
+      "sourceType": "github",
+      "skillPath": "skills/security-audit/SKILL.md",
+      "computedHash": "8513eb3b2c39b8d05ef4f47b32ef4d18280b93a5efb91d8df6272f7435034af5",
+      "commit": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8"
     },
     "tdd": {
       "source": "mattpocock/skills",
